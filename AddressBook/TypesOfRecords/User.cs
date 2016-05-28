@@ -5,8 +5,27 @@ using System.Text;
 
 namespace AddressBooks
 {
+    /// <summary>
+    /// Класс описывает пользовательские данные, которые будут содержаться в экземплярах класса
+    /// </summary>
     class User : IRecord
     {
+        public User() : this("John", "Doe") { }
+        public User(string fname, string lname, string city = "n/a", string address = "n/a", long phoneNumber = 0,
+                        string email = "n/a", Gender gender = Gender.unknown, DateTime birthDate = new DateTime())
+        {
+            FirstName = fname;
+            LastName = lname;
+            City = city;
+            Address = address;
+            PhoneNumber = phoneNumber;
+            Email = email;
+            Gender = gender;
+            BirthDate = birthDate;
+            TimeAdded = DateTime.Now;
+        }
+
+ #region Реализация интерфейса IRecord
         private DateTime _birthDate;
 
         public string FirstName { get; set; }
@@ -28,26 +47,14 @@ namespace AddressBooks
                     _birthDate = new DateTime();
             }
         }
-
-        
-        public User() : this("John", "Doe") { }
-        public User(string fname, string lname, string city = "n/a", string address = "n/a", long phoneNumber = 0,
-                        string email = "n/a", Gender gender = Gender.unknown, DateTime birthDate = new DateTime())
-        {
-            FirstName = fname;
-            LastName = lname;
-            City = city;
-            Address = address;
-            PhoneNumber = phoneNumber;
-            Email = email;
-            Gender = gender;
-            BirthDate = birthDate;
-            TimeAdded = DateTime.Now;
-        }
-//TODO: User.ToString() - Настроить вывод 
+ #endregion
         public override string ToString()
         {
-            return string.Format("{0} | {1} | {2} | {3}", FirstName, LastName, City, TimeAdded);
+            // Формируем формат вывода номера телефона и даты рождения
+            string tel = (PhoneNumber != 0) ? PhoneNumber.ToString("(000) 000-00-00") : "n/a";
+            string born = (BirthDate.Year == 1) ? "n/a" : BirthDate.ToString("dd/MM/yyyy");
+
+            return string.Format("[{0} {1}, gender: {6}][city: {2}, address: {3}][tel: {4}, e-mail: {5}][born: {7:yyyy}][added: {8:dd/MM/yy HH:mm}]", LastName, FirstName, City, Address, tel, Email, Gender, born, TimeAdded);
         }
     }
 }

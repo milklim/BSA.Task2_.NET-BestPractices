@@ -11,20 +11,16 @@ namespace Program
         static void Main()
         {
             AddressBook Users = new AddressBookWithUsers();
-            Users.AddRecord("Vladimir", "Klimenko");
-            Users.AddRecord();
 
-            foreach (var item in Users)
-            {
-                Console.WriteLine("1: {0}", item);
-            }
+            Users.AddRecord("Vasiliy", "Pupkin", "Zhitomir", phoneNumber: 0990484566, gender:Gender.male, birthDate: new DateTime(1980,05,28));
+            Users.AddRecord("Vladimir", "Klimenko", "Pavlograd",phoneNumber:0507757568, email:"klimbox@gmail.com",gender:Gender.male, birthDate:new DateTime(1987,01,27));
+            Users.AddRecord("Sherlock", "Holms", "London", "Baker str.", 0985647531, "eioo@git.ua", Gender.male, new DateTime(1985, 12, 05));
+            Users.AddRecord("", "Vatson", gender:Gender.male);
 
-            Users.RemoveRecord(1);
-
-            foreach (var item in Users)
-            {
-                Console.WriteLine("2: {0}",item);
-            }
+            Users.RemoveRecord(0);
+            Users.RemoveRecord(6);
+            Users.RemoveRecord("Holms");
+            Users.RemoveRecord("karabas");
 
             Console.ReadKey();
         }
