@@ -7,7 +7,7 @@
     <ProjectGuid>{46810277-CD8C-4269-94F0-0A1AF8CB9049}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AddressBook</RootNamespace>
+    <RootNamespace>AddressBooks</RootNamespace>
     <AssemblyName>AddressBook</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -41,6 +41,10 @@
   <ItemGroup>
     <Compile Include="AddressBook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypesOfRecords\GenderEnum.cs" />
+    <Compile Include="TypesOfRecords\IRecord.cs" />
+    <Compile Include="TypesOfRecords\User.cs" />
+    <Compile Include="AddressBookWithUsers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

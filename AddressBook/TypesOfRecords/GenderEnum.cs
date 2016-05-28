@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Logger
+namespace AddressBooks
 {
-    public class Logger
+    public enum Gender
     {
-       
+        female = 0,
+        male,
+        unknown
     }
 }
