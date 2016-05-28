@@ -1,36 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LogInfo;
 
 namespace AddressBooks
 {
     public class AddressBookWithUsers : AddressBook
     {
-        /// <summary>
-        /// Инициализирует новый экземпляр класса AddressBookWithUsers
-        /// Здесь происходит подписка на события создания/удаления записи
-        /// </summary>
         public AddressBookWithUsers()
         {
             Records = new List<IRecord>();
+            // the event subscription
             UserAdded += Logger.Instance.Info;
             UserRemoved += Logger.Instance.Info;
             OnWarning += Logger.Instance.Warning;
+            OnDebug += Logger.Instance.Debug;
+            OnError += Logger.Instance.Error;
         }
 
-        // события по которым будет осуществляться запись в лог
         public delegate void AddLogDelegate(string s);
         public delegate void RemoveLogDelegate(string s);
         public delegate void WarningDelegate(string s);
         public delegate void DebugDelegate(string s);
+        public delegate void ErrorDelegate(string s);
         public event AddLogDelegate UserAdded;
         public event RemoveLogDelegate UserRemoved;
         public event WarningDelegate OnWarning;
         public event DebugDelegate OnDebug;
-       
-#region Реализация абстактных методов класса AddressBook
+        public event ErrorDelegate OnError;
+
+#region Implementation of the abstract methods of the AddressBook class
         public override void AddRecord(string fname, string lname, string city, string address, long phoneNumber, string email, Gender gender, DateTime birthDate)
         {
             try
@@ -42,7 +40,7 @@ namespace AddressBooks
             }
             catch (Exception ex)
             {
-                OnDebug(string.Format("Failed to create new entry. (Args: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}). -- {8}", fname, lname, city, address, phoneNumber, email, gender, birthDate, ex.StackTrace));
+                OnError(string.Format("Failed to create new entry. (Args: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}). -- {8}", fname, lname, city, address, phoneNumber, email, gender, birthDate, ex.StackTrace));
             }
         }
         public override void RemoveRecord(int index)
@@ -55,7 +53,7 @@ namespace AddressBooks
             }
             catch (ArgumentOutOfRangeException ex)
             {
-                OnWarning(string.Format("Failed to remove the entry at index {0}. -- {1}", index, ex.GetType()));
+                OnDebug(string.Format("Failed to remove the entry at index {0}. -- {1}", index, ex.StackTrace));
             }
 
         }
@@ -93,12 +91,9 @@ namespace AddressBooks
             }
 
             if (!removed)
-                UserRemoved(string.Format("Failed to remove the entry by name. (name: {0})", name));
+                OnWarning(string.Format("Failed to remove the entry by name. (name: {0})", name));
         }
 #endregion
-
-
-
 
     }
 }

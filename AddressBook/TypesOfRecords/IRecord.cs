@@ -14,4 +14,11 @@ namespace AddressBooks
         string LastName { get; set; }
         long PhoneNumber { get; set; }
     }
+
+    public enum Gender
+    {
+        female = 0,
+        male,
+        unknown
+    }
 }

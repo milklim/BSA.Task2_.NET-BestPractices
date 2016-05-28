@@ -41,7 +41,6 @@
   <ItemGroup>
     <Compile Include="AddressBook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypesOfRecords\GenderEnum.cs" />
     <Compile Include="TypesOfRecords\IRecord.cs" />
     <Compile Include="TypesOfRecords\User.cs" />
     <Compile Include="AddressBookWithUsers.cs" />

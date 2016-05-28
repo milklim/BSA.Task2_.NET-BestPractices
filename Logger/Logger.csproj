@@ -42,6 +42,7 @@
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sources\Console.cs" />
+    <Compile Include="Sources\File.cs" />
     <Compile Include="Sources\OuterSource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
